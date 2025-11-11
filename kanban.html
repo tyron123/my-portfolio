@@ -31,7 +31,7 @@
       .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
       .focus-ring:focus { outline: 3px solid var(--brand); outline-offset: 2px; }
       .soft-img { box-shadow: 0 10px 30px rgba(0,0,0,.12); border-radius: 0.75rem; }
-      .btn { border: 1px solid rgba(0,0,0,.15); padding: .6rem 1rem; border-radius: .6rem; display: inline-flex; align-items: center; gap: .5rem; }
+      .btn { border: 1px solid rgba(0,0,0,.15); padding: .6rem 1rem; border-radius: .6rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; text-align: center; }
       .btn:hover { background: rgba(0,0,0,.04); }
       .btn-primary { background: var(--brand); color: white; border-color: transparent; }
       .btn-primary:hover { filter: brightness(1.05); }
@@ -42,6 +42,8 @@
       .dark .card { background: #111114; border-color: rgba(255,255,255,.08); }
       .dark .btn { border-color: rgba(255,255,255,.2); }
       .dark .btn:hover { background: rgba(255,255,255,.08); }
+      /* Footer icon sizes */
+      .icon { width: 22px; height: 22px; }
     </style>
   </head>
 
@@ -156,16 +158,63 @@
   });
 </script>
 
+<script>
+  (function(){ 
+    const PASS = "ty";
+    const KEY = "tvaz_case_access";
+    function gate(){
+      if(localStorage.getItem(KEY)==="ok") return;
+      const overlay = document.createElement('div');
+      overlay.className = "fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4";
+      overlay.innerHTML = `
+        <div class="card max-w-sm w-full p-6 bg-white dark:bg-[#111114]">
+          <h2 class="text-lg font-medium mb-2">Enter password</h2>
+          <p class="text-sm opacity-80 mb-4">Case studies are protected. Enter the password to view.</p>
+          <form id="pwForm" class="space-y-3">
+            <input id="pwInput" type="password" class="w-full p-3 rounded-lg border" placeholder="Password" aria-label="Password" required />
+            <button class="btn btn-primary w-full" type="submit">Unlock</button>
+            <p id="pwErr" class="text-sm text-red-600 hidden">Incorrect password, try again.</p>
+          </form>
+        </div>`;
+      document.body.appendChild(overlay);
+      const form = overlay.querySelector('#pwForm');
+      const input = overlay.querySelector('#pwInput');
+      const err = overlay.querySelector('#pwErr');
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        if(input.value === PASS){ localStorage.setItem(KEY,"ok"); overlay.remove(); }
+        else { err.classList.remove('hidden'); input.value=''; input.focus(); }
+      });
+      input.focus();
+    }
+    document.addEventListener('DOMContentLoaded', gate);
+  })();
+</script>
+
     <footer class="mt-24 border-t border-black/10">
-      <div class="container-12 py-8 grid gap-4 md:flex md:items-center md:justify-between">
+      <div class="container-12 py-8 text-center">
         <div class="text-sm opacity-80">© 2025 Tyron Vaz</div>
-        <div class="flex gap-4 text-sm">
-          <a class="underline hover:no-underline" href="https://www.linkedin.com/in/tyron123/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="underline hover:no-underline" href="https://www.behance.net/tyron123/" target="_blank" rel="noopener">Behance</a>
-          <a class="underline hover:no-underline" href="mailto:tyron.vaz@gmail.com">Email</a>
-          <a class="underline hover:no-underline" href="https://medium.com/@tyron123" target="_blank" rel="noopener">Blog</a>
-          <a class="btn btn-primary" href="https://drive.google.com/file/d/1AWr2HnycVeeC_N_vxYVd1TCmuO-fCzOn/view?usp=drive_link" target="_blank" rel="noopener">Résumé</a>
-        </div>
+        <div class="mt-4 flex items-center justify-center gap-4"><a class="p-2 rounded-md hover:bg-black/5 focus-ring" href="https://www.linkedin.com/in/tyron123/" title="LinkedIn" aria-label="LinkedIn" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.2 2.3-2.46 4.74-2.46 5.07 0 6 3.34 6 7.68V24h-5V16.1c0-1.88-.03-4.3-2.62-4.3-2.63 0-3.03 2.05-3.03 4.16V24h-5V8z"/>
+  </svg>
+</a><a class="p-2 rounded-md hover:bg-black/5 focus-ring" href="https://www.behance.net/tyron123/" title="Behance" aria-label="Behance" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M4 7h6a4 4 0 110 8H4V7zm6 6a2 2 0 100-4H6v4h4zM14 7h6v2h-6V7zm.5 3H20a3.5 3.5 0 110 7h-6v-2h6a1.5 1.5 0 100-3h-5.5v-2z"/>
+  </svg>
+</a><a class="p-2 rounded-md hover:bg-black/5 focus-ring" href="mailto:tyron.vaz@gmail.com" title="Email" aria-label="Email" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M2 5h20v14H2V5zm10 7L3.5 7h17L12 12z"/>
+  </svg>
+</a><a class="p-2 rounded-md hover:bg-black/5 focus-ring" href="https://medium.com/@tyron123" title="Blog" aria-label="Blog" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M5 4h14v2H5V4zm0 4h10v2H5V8zm0 4h14v2H5v-2zm0 4h10v2H5v-2z"/>
+  </svg>
+</a><a class="p-2 rounded-md hover:bg-black/5 focus-ring" href="https://drive.google.com/file/d/1AWr2HnycVeeC_N_vxYVd1TCmuO-fCzOn/view?usp=drive_link" title="Résumé" aria-label="Résumé" target="_blank" rel="noopener">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M6 2h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm7 1.5V7h3.5L13 3.5zM8 9h8v2H8V9zm0 4h8v2H8v-2zm0 4h6v2H8v-2z"/>
+  </svg>
+</a></div>
       </div>
     </footer>
   </body>
