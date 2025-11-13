@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Tyron Vaz – Product Designer" />
-    <title>Hello, I'm Tyron Vaz · Product Designer</title>
+    <title>Other Projects & Explorations</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -62,7 +62,7 @@
           <a href="index.html" class="font-medium tracking-tight focus-ring">Tyron Vaz</a>
           <button id="nav-toggle" class="md:hidden p-2 rounded focus-ring" aria-label="Open menu">☰</button>
       <nav class="flex items-center gap-6" aria-label="Primary">
-            <a class="text-sm text-textcol dark:text-white" href="index.html">Overview</a>
+            <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white" href="index.html">Overview</a>
             <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white" href="about.html">About</a>
             <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white" href="contact.html">Contact</a>
             <div class="relative ml-4">
@@ -107,14 +107,67 @@
     </script>
 
   <main id="main">
-    <section class="container-12 py-28 md:py-40 text-center space-y-7 md:space-y-8">
-      <h1 class="text-5xl md:text-7xl font-semibold leading-tight">Hello, I'm Tyron Vaz</h1>
-      <p class="text-2xl md:text-3xl opacity-90">Product Designer</p>
-      <p class="max-w-3xl mx-auto text-xl md:text-2xl">I like transforming complex systems into intuitive, efficient, and accessible experiences</p>
-      <a href="gallery.html" class="btn btn-primary focus-ring text-lg">Explore My Work</a>
-      <p class="opacity-80 text-base md:text-lg">Currently, I'm visualizing business requests into accessible, and impactful workflows for next gen ITSM</p>
+    <section class="container-12 pt-16 pb-8">
+      <h1 class="text-3xl md:text-4xl font-semibold">Other Projects & Explorations</h1>
+      <div class="mt-4 flex flex-wrap gap-2 justify-center" role="group" aria-label="Filters">
+        <button class="tag-pill" data-filter="all" aria-pressed="true">All</button>
+        <button class="tag-pill" data-filter="DesignOps">DesignOps</button>
+        <button class="tag-pill" data-filter="Visual">Visual</button>
+        <button class="tag-pill" data-filter="Tooling">Tooling</button>
+        <button class="tag-pill" data-filter="Workshop">Workshop</button>
+        <a class="btn btn-minimal ml-4" href="https://www.behance.net/tyron123/" target="_blank" rel="noopener">View more on Behance</a>
+      </div>
+    </section>
+    <section class="container-12 pb-20">
+      <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="card p-4" data-tags="DesignOps Tooling">
+          <div class="grid grid-cols-2 gap-2 mb-3"><img src="https://placehold.co/960x540?text=DS%20component%20A" class="soft-img js-zoom" alt="DS component A" /><img src="https://placehold.co/960x540?text=Pattern%20exploration" class="soft-img js-zoom" alt="Pattern exploration" /></div>
+          <h3 class="font-medium">Collaboration with Design System</h3>
+          <div class="mt-2 flex gap-2 text-xs"><span class="tag-pill">DesignOps</span><span class="tag-pill">Tooling</span></div>
+        </article>
+        <article class="card p-4" data-tags="Tooling Visual">
+          <div class="grid grid-cols-2 gap-2 mb-3"><img src="https://placehold.co/960x540?text=Map%20heuristics" class="soft-img js-zoom" alt="Map heuristics" /><img src="https://placehold.co/960x540?text=Route%20UI" class="soft-img js-zoom" alt="Route UI" /></div>
+          <h3 class="font-medium">Travelling Salesman App</h3>
+          <div class="mt-2 flex gap-2 text-xs"><span class="tag-pill">Tooling</span><span class="tag-pill">Visual</span></div>
+        </article>
+      </div>
     </section>
   </main>
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const cards = document.querySelectorAll('#grid article');
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      const tag = btn.getAttribute('data-filter');
+      buttons.forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      cards.forEach(card => {
+        if(tag==='all') { card.style.display = ''; return; }
+        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
+        card.style.display = tags.includes(tag.toLowerCase()) ? '' : 'none';
+      });
+    }));
+  </script>
+
+<script>
+  const mkLightbox = () => {
+    const overlay = document.createElement('div');
+    overlay.id = 'lightbox';
+    overlay.className = 'fixed inset-0 z-[100] bg-black/70 hidden items-center justify-center p-4';
+    overlay.innerHTML = '<div role="dialog" aria-modal="true"><img id="lightbox-img" class="max-h-[90vh] max-w-[90vw] rounded" alt="Expanded image"/></div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', ()=> overlay.classList.add('hidden'));
+    return overlay;
+  };
+  const overlay = mkLightbox();
+  document.addEventListener('click', (e)=>{
+    const t = e.target;
+    if(t.classList && t.classList.contains('js-zoom')){
+      const img = document.getElementById('lightbox-img');
+      img.src = t.getAttribute('src');
+      overlay.classList.remove('hidden');
+    }
+  });
+</script>
 
     <footer class="mt-24 border-t border-black/10">
       <div class="container-12 py-8 text-center">
@@ -130,7 +183,7 @@
 </a><a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center" href="https://drive.google.com/file/d/1AWr2HnycVeeC_N_vxYVd1TCmuO-fCzOn/view?usp=drive_link" title="Résumé" aria-label="Résumé" target="_blank" rel="noopener">
   <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 2h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm7 1.5V7h3.5L13 3.5zM8 9h8v2H8V9zm0 4h8v2H8v-2zm0 4h6v2H8v-2z"/></svg><span class="ml-1 text-sm">Résumé</span>
 </a></div>
-        <div class="mt-3 text-xs opacity-80">Crafting seamless, empowering experiences that connect people, purpose, and technology.</div>
+        
       </div>
     </footer>
   
