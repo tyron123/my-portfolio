@@ -51,23 +51,46 @@
       .dark .tag-pill { border-color: rgba(255,255,255,.25); }
       .dark .btn-ghost:hover { background: rgba(255,255,255,.08); }
     </style>
-</head>
+<style>
+/* Navigation states (AA) */
+:root{--brand:#1E2A38;--text:#1B1B1F;--brand-contrast:#0A1520;--brand-200:#243447}
+nav a{border-bottom:2px solid transparent}
+nav a:hover{border-bottom-color:rgba(0,0,0,.25)}
+nav a[aria-current="page"],nav a[data-selected="true"]{border-bottom-color:var(--brand);font-weight:600}
+nav a[aria-current="page"]:hover{border-bottom-color:var(--brand-contrast)}
+nav a:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:4px}
+nav a[aria-current="page"]:focus-visible{outline:3px solid var(--brand-contrast)}
+/* Buttons */
+.btn{transition:filter .15s,box-shadow .15s,transform .05s}
+.btn[data-state="selected"]{box-shadow:inset 0 0 0 2px var(--brand)}
+.btn:hover{filter:brightness(1.03)}
+.btn[data-state="selected"]:hover{box-shadow:inset 0 0 0 2px var(--brand-contrast)}
+.btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn[data-state="selected"]:focus-visible{outline:3px solid var(--brand-contrast)}
+/* Dark */
+.dark nav a{color:#EDEDEF}
+.dark nav a:hover{border-bottom-color:rgba(255,255,255,.4)}
+.dark nav a[aria-current="page"]{border-bottom-color:#9EC8FF}
+.dark nav a[aria-current="page"]:hover{border-bottom-color:#CFE4FF}
+.dark .btn[data-state="selected"]{box-shadow:inset 0 0 0 2px #9EC8FF}
+.dark .btn[data-state="selected"]:hover{box-shadow:inset 0 0 0 2px #CFE4FF}
+.dark .btn:focus-visible,.dark nav a:focus-visible{outline-color:#9EC8FF}
+</style></head>
 <body class="bg-white text-textcol dark:bg-[#0B0B0C] dark:text-[#EDEDEF]">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="sticky top-0 z-50 border-b border-black/10 bg-white/75 backdrop-blur dark:bg-[#0B0B0C]/75">
 <div class="container-12">
 <div class="h-16 flex items-center justify-between">
 <a class="font-medium tracking-tight focus-ring" href="index.html">Tyron Vaz</a>
-<button aria-label="Open menu" class="md:hidden p-2 rounded focus-ring" id="nav-toggle">☰</button>
-<nav aria-label="Primary" class="flex items-center gap-6">
+<button aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" class="md:hidden p-2 rounded focus-ring" id="nav-toggle">☰</button><nav aria-label="Primary" class="md:flex items-center hidden gap-6 flex" id="primary-nav">
 <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white" href="index.html">Overview</a>
 <a aria-current="page" class="text-sm text-textcol dark:text-white" href="about.html">About</a>
 <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white" href="contact.html">Contact</a>
 <div class="relative ml-4">
 <button aria-controls="csMenu" aria-expanded="false" aria-haspopup="true" class="btn-ghost text-sm flex items-center gap-1" id="csMenuBtn">
-                Work <svg aria-hidden="true" class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
+                Case studies <svg aria-hidden="true" class="w-3.5 h-3.5" fill="currentColor" viewbox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg>
 </button>
-<div aria-label="Work" class="absolute right-0 mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-md hidden dark:bg-[#111114]" id="csMenu" role="menu">
+<div aria-label="Case Studies" class="absolute right-0 mt-2 w-56 rounded-xl border border-black/10 bg-white shadow-md hidden dark:bg-[#111114]" id="csMenu" role="menu">
 <a class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="kanban.html" role="menuitem">Kanban Workflow</a>
 <a class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="gpd.html" role="menuitem">Graphical Process Designer</a>
 <a class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="gallery.html" role="menuitem">Other Projects &amp; Explorations</a>
@@ -108,48 +131,33 @@
 <h1 class="text-3xl md:text-4xl font-semibold">About Me</h1>
 <p class="mt-2 opacity-80 max-w-3xl mx-auto">Hey, I’m Tyron — a UX designer who loves turning messy, complex systems into experiences that make sense. I’m drawn to problems where humans and technology meet. I care about clarity, inclusion, and impact.</p>
 </section>
-<section class="container-12 grid md:grid-cols-3 gap-8 pb-16">
-<aside class="md:order-first space-y-4 md:col-span-1 order-first md:order-first space-y-4 md:col-span-1">
+<section class="grid md:grid-cols-3 container-12 gap-8 md:pb-24 pb-20">
+<aside class="order-last md:order-first space-y-4 md:col-span-1">
 <img alt="Portrait placeholder" class="soft-img w-full" src="https://placehold.co/800x1000?text=Portrait"/>
 <a class="btn w-full btn-primary" href="contact.html"><span class="mx-auto">Get in touch</span></a><a class="btn w-full btn-minimal flex items-center justify-center gap-2" download="" href="assets/TyronVaz_CV.pdf"><svg aria-hidden="true" class="icon" fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M12 3v10.17l3.59-3.58L17 11l-5 5-5-5 1.41-1.41L11 13.17V3h1zM5 19h14v2H5z"></path></svg>Download CV</a>
 </aside>
 <div class="md:col-span-2 space-y-8">
-<div class="grid sm:grid-cols-2 gap-4">
-<div class="rounded-xl border p-4">
-<h3 class="text-sm opacity-70">Experience</h3>
-<p><strong>20</strong> years in IT · <strong>7</strong> in Product Design</p>
-</div>
-<div class="rounded-xl border p-4">
-<h3 class="text-sm opacity-70">Industries</h3>
-<p>IT, Pharmaceutical, Food, B2B</p>
-</div>
-</div>
-
-
 <div class="prose max-w-none">
-<h2>Why I Design</h2>
-<p>My UX journey started with a crash. About twenty years ago, I helped roll out SharePoint at work. A few power users uploaded 30–40 MB photos to every page — the whole intranet went down. That moment stuck with me: design isn’t decoration, it’s function. It’s how we make technology serve people, not frustrate them.</p>
-<h2>How I Work</h2>
-<p>I bring everyone in early — engineers, PMs, support teams — because collaboration sharpens design. I take time to research, test, and iterate so what we build actually holds up in use. People I’ve worked with call me easygoing, detailed, and transparent. I like untangling complex systems and shaping them into something intuitive and human.</p>
-<h2>What Drives Me</h2>
-<p>Good design is inclusive, transparent, and accessible. When you design for the outliers — the 1% who are often left out — everyone benefits. I’m especially drawn to improving digital public services and civic tech. If design can make applying for healthcare, benefits, or immigration support less stressful, that’s impact that matters.</p>
-<div class="my-8 p-6 rounded-xl border-l-4 border-gray-300 bg-gray-50 dark:bg-white/5">
-<h3 class="mt-0">Design Philosophy</h3>
-<blockquote class="m-0">“Respect the terrain — but always move with purpose.”</blockquote>
-<p class="mt-3">In mountaineering, the mountain always wins. You adapt. Design’s the same — every product has its own terrain: legacy systems, user limits, internal politics. I map it, listen, and move with empathy and intent.</p>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Why I Design</h2>
+<p class="mb-4">My UX journey started with a crash. About twenty years ago, I helped roll out SharePoint at work. A few power users uploaded 30–40 MB photos to every page — the whole intranet went down. That moment stuck with me: design isn’t decoration, it’s function. It’s how we make technology serve people, not frustrate them.</p>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">How I Work</h2>
+<p class="mb-4">I bring everyone in early — engineers, PMs, support teams — because collaboration sharpens design. I take time to research, test, and iterate so what we build actually holds up in use. People I’ve worked with call me easygoing, detailed, and transparent. I like untangling complex systems and shaping them into something intuitive and human.</p>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">What Drives Me</h2>
+<p class="mb-4">Good design is inclusive, transparent, and accessible. When you design for the outliers — the 1% who are often left out — everyone benefits. I’m especially drawn to improving digital public services and civic tech. If design can make applying for healthcare, benefits, or immigration support less stressful, that’s impact that matters.</p>
 </div>
-<p class="text-lg"><strong>Let’s connect</strong> — I’m always up for talking design, systems, or the small details that make big experiences work.</p>
+<div class="prose max-w-none">
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Profile</h2>
+<p class="mb-4">I design systems that scale: patterns, tokens, and flows that work across teams. Accessibility and performance are part of the foundation. I care about outcomes and clarity.</p>
 </div>
-
 <div class="grid md:grid-cols-2 gap-6">
 <div class="prose max-w-none">
-<h2>Experience</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Experience</h2>
 <ul>
 <li>Senior UX / Product Designer – TOPdesk GmbH (enterprise tools, design system)</li>
-<li>DesignOps</li></ul>
+</ul>
 </div>
 <div class="prose max-w-none">
-<h2>Skills</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Skills</h2>
 <ul>
 <li>Research: interviews, mapping, audits</li>
 <li>Interaction &amp; Visual: flows, wireframes, prototypes</li>
@@ -159,7 +167,7 @@
 </div>
 <div class="grid md:grid-cols-2 gap-6">
 <div class="prose max-w-none">
-<h2>Hats I Wear</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Hats I Wear</h2>
 <ul>
 <li>UX Designer</li>
 <li>Product Designer (physical &amp; digital)</li>
@@ -169,7 +177,7 @@
 </ul>
 </div>
 <div class="prose max-w-none">
-<h2>Languages</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Languages</h2>
 <ul>
 <li>Fluent: English, Hindi, Konkani, Italian</li>
 <li>Learning: German</li>
@@ -179,7 +187,7 @@
 </div>
 <div class="grid md:grid-cols-2 gap-6">
 <div class="prose max-w-none">
-<h2>Hobbies &amp; Interests</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Hobbies &amp; Interests</h2>
 <ul>
 <li>Collecting S‑scale diecast cars; customizing when time allows</li>
 <li>Mountaineering and rock climbing</li>
@@ -188,7 +196,7 @@
 </ul>
 </div>
 <div class="prose max-w-none">
-<h2>Certifications / Trainings</h2>
+<h2 class="font-semibold pt-2 text-xl mt-10 border-black/10 md:text-2xl border-t mb-2">Certifications / Trainings</h2>
 <ul>
 <li>Perception and Memory in HCI and UX — IxDF</li>
 <li>Accessibility: How to Design for All! — IxDF</li>
@@ -215,12 +223,5 @@
 </a></div>
 </div>
 </footer>
-<script>
-      const btn=document.getElementById('nav-toggle');
-      const row=document.querySelector('.nav-row');
-      if(btn && row){
-        btn.addEventListener('click', ()=>{ row.classList.toggle('hidden'); });
-      }
-    </script>
-</body>
+<script>(function(){var b=document.getElementById('nav-toggle'),n=document.getElementById('primary-nav');if(b&&n){b.addEventListener('click',function(){var h=n.classList.toggle('hidden');b.setAttribute('aria-expanded',(!h).toString());});}})();</script></body>
 </html>
