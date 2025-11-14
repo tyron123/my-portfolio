@@ -86,6 +86,13 @@ nav a[aria-current="page"]:focus-visible{outline:3px solid var(--brand-contrast)
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   }
 </style>
+<style>
+  /* Only images get the 16:9 box */
+  img.soft-img { width:100%; aspect-ratio:16/9; object-fit:cover; 
+                 border-radius:0.75rem; box-shadow:0 10px 30px rgba(0,0,0,.12); }
+  /* Non-images keep the visual style but no forced ratio */
+  .soft-img:not(img) { aspect-ratio:auto; object-fit:initial; }
+</style>
 </head>
 <body class="bg-white text-textcol dark:bg-[#0B0B0C] dark:text-[#EDEDEF]">
 <a class="skip-link" href="#main">Skip to content</a>
