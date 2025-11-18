@@ -1,0 +1,279 @@
+:root {
+    --brand: #1E2A38;
+    --gray-bg: #F5F7FA;
+    --text: #1B1B1F;
+    color-scheme: light dark;
+}
+
+html,
+body {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.container-12 {
+    max-width: 112rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+.card {
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, .08);
+    background: white;
+}
+
+.card:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+}
+
+.focus-ring:focus {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+}
+
+.soft-img {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    border-radius: 0.75rem;
+}
+
+.main_btn:hover {
+    background: black !important;
+}
+
+.btn {
+    border: 1px solid rgba(0, 0, 0, .15);
+    padding: .7rem 1.1rem;
+    border-radius: .7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    text-align: center;
+}
+
+.btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: var(--brand);
+    color: white;
+    border-color: transparent;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.05);
+}
+
+.btn-minimal {
+    border: 1px solid rgba(0, 0, 0, .2);
+    background: transparent;
+}
+
+.btn-ghost {
+    border: none;
+    background: transparent;
+    padding: .7rem 1.1rem;
+    border-radius: .7rem;
+}
+
+.btn-ghost:hover {
+    background: rgba(0, 0, 0, .06);
+}
+
+.tag-pill {
+    font-size: .8rem;
+    padding: .35rem .7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    background: transparent;
+}
+
+.tag-pill[aria-pressed="true"] {
+    background: rgba(0, 0, 0, .06);
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    background: #fff;
+    color: #000;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    z-index: 1000;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+}
+
+.dark header a {
+    color: #EDEDEF;
+}
+
+.dark header a:hover {
+    color: #ffffff;
+}
+
+.dark header .btn,
+.dark .btn-minimal {
+    border-color: rgba(255, 255, 255, .25);
+}
+
+.dark .btn-minimal:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+.dark .tag-pill {
+    border-color: rgba(255, 255, 255, .25);
+}
+
+.dark .btn-ghost:hover {
+    background: rgba(255, 255, 255, .08);
+}
+
+/* Navigation states (AA) */
+:root {
+    --brand: #1E2A38;
+    --text: #1B1B1F;
+    --brand-contrast: #0A1520;
+    --brand-200: #243447
+}
+
+nav a {
+    border-bottom: 2px solid transparent;
+    padding: 21px 0;
+}
+
+nav a:hover {
+    border-bottom-color: rgba(0, 0, 0, .25)
+}
+
+nav a[aria-current="page"],
+nav a[data-selected="true"] {
+    border-bottom-color: var(--brand);
+    font-weight: 600;
+    padding: 21px 0;
+}
+
+nav a[aria-current="page"]:hover {
+    border-bottom-color: var(--brand-contrast)
+}
+
+nav a:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 4px
+}
+
+nav a[aria-current="page"]:focus-visible {
+    outline: 3px solid var(--brand-contrast)
+}
+
+/* Buttons */
+.btn {
+    transition: filter .15s, box-shadow .15s, transform .05s
+}
+
+.btn[data-state="selected"] {
+    box-shadow: inset 0 0 0 2px var(--brand)
+}
+
+.btn:hover {
+    filter: brightness(1.03)
+}
+
+.btn[data-state="selected"]:hover {
+    box-shadow: inset 0 0 0 2px var(--brand-contrast)
+}
+
+.btn:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px
+}
+
+.btn[data-state="selected"]:focus-visible {
+    outline: 3px solid var(--brand-contrast)
+}
+
+/* Dark */
+.dark nav a {
+    color: #EDEDEF
+}
+
+.dark nav a:hover {
+    border-bottom-color: rgba(255, 255, 255, .4)
+}
+
+.dark nav a[aria-current="page"] {
+    border-bottom-color: #9EC8FF
+}
+
+.dark nav a[aria-current="page"]:hover {
+    border-bottom-color: #CFE4FF
+}
+
+.dark .btn[data-state="selected"] {
+    box-shadow: inset 0 0 0 2px #9EC8FF
+}
+
+.dark .btn[data-state="selected"]:hover {
+    box-shadow: inset 0 0 0 2px #CFE4FF
+}
+
+.dark .btn:focus-visible,
+.dark nav a:focus-visible {
+    outline-color: #9EC8FF
+}
+
+.modal_width {
+    width: 280px;
+    overflow: hidden;
+}
+
+.modal_width a,
+.modal_width a[aria-current="page"],
+.modal_width a[data-selected="true"] {
+    padding: 0.5rem 1rem;
+}
+
+#themeToggle {
+    display: none;
+}
+
+
+@media (max-width: 500px) {
+    header:has(button[aria-expanded="true"]) {
+        height: 124px;
+    }
+    nav {
+        gap: 1rem;
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        left: 0;
+        padding: 0 1rem;
+        justify-content: space-between;
+    }
+
+    #csMenu {
+        right: 0;
+        left: unset;
+    }
+}
