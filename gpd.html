@@ -1,11 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>GPD Case Study</title></head>
-<body>
-  <main>
-    <h1>Graphical Process Designer (GPD)</h1>
-    <p>Designed a BPMN-style interface to unify request types...</p>
-    <p>Outcome: MVP tested, forms base of new ITSM Design Hub.</p>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="Tyron Vaz – Product Designer" name="description" />
+  <title>GPD · Case Study</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="./styles/index.css" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: '#1E2A38',
+            textcol: '#1B1B1F',
+            graybg: '#F5F7FA'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Uniform case study images */
+    .soft-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .grid {
+      gap: 1rem;
+    }
+  </style>
+  <style>
+    /* Only images get the 16:9 box */
+    img.soft-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    }
+
+    /* Non-images keep the visual style but no forced ratio */
+    .soft-img:not(img) {
+      aspect-ratio: auto;
+      object-fit: initial;
+    }
+  </style>
+  <style>
+    /* Smooth grid transition for case study image groups */
+    .case-grid {
+      display: grid;
+      gap: 1rem;
+      /* same as Tailwind gap-4 */
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .case-grid.cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-grid.cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .case-grid.cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    /* Keeps all grids centered and maxed at a shared width */
+    .case-grid img {
+      width: 100%;
+      border-radius: 0.75rem;
+    }
+  </style>
+
+</head>
+
+<body class="bg-white text-textcol dark:bg-[#0B0B0C] dark:text-[#EDEDEF]">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="sticky top-0 z-50 border-b border-black/10 bg-white/75 backdrop-blur dark:bg-[#0B0B0C]/75">
+    <div class="container-12">
+      <div class="h-16 flex items-center justify-between">
+        <a class="font-medium tracking-tight focus-ring" href="index.html">Tyron Vaz</a>
+        <button aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu"
+          class="md:hidden p-2 rounded focus-ring" id="nav-toggle">☰</button>
+        <nav aria-label="Primary" class="md:flex items-center hidden gap-6 flex" id="primary-nav">
+          <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white"
+            href="index.html">Overview</a>
+          <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white"
+            href="about.html">About</a>
+          <a class="text-sm text-textcol/80 hover:text-textcol dark:text-[#EDEDEF]/80 dark:hover:text-white"
+            href="contact.html">Contact</a>
+          <div class="relative ml-4">
+            <button aria-controls="csMenu" aria-expanded="false" aria-haspopup="true"
+              class="btn-ghost text-sm flex items-center gap-1" id="csMenuBtn">
+              Case studies <svg aria-hidden="true" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </button>
+            <div aria-label="Case Studies"
+              class="absolute right-0 mt-2 modal_width rounded-xl border border-black/10 bg-white shadow-md hidden dark:bg-[#111114]"
+              id="csMenu" role="menu">
+              <a class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="kanban.html"
+                role="menuitem">Kanban-board</a>
+              <a aria-current="page" class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="gpd.html"
+                role="menuitem">Graphical Process Designer</a>
+              <a class="block px-4 py-2 hover:bg-black/5 dark:hover:bg-white/10" href="gallery.html"
+                role="menuitem">Other Projects &amp; Explorations</a>
+            </div>
+          </div>
+          <button aria-label="Toggle dark mode" aria-pressed="false" class="text-sm btn" id="themeToggle">Toggle
+            theme</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <script>
+    const toggleTheme = () => {
+      const doc = document.documentElement;
+      const isDark = doc.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      document.getElementById('themeToggle').setAttribute('aria-pressed', isDark);
+    };
+    const toggleMenu = () => {
+      const btn = document.getElementById('csMenuBtn');
+      const menu = document.getElementById('csMenu');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      menu.classList.toggle('hidden');
+    };
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); document.getElementById('themeToggle').setAttribute('aria-pressed', true); }
+      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+      document.getElementById('csMenuBtn').addEventListener('click', toggleMenu);
+      document.addEventListener('click', (e) => {
+        const menu = document.getElementById('csMenu');
+        const btn = document.getElementById('csMenuBtn');
+        if (!menu.contains(e.target) && !btn.contains(e.target)) { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); }
+      });
+    });
+  </script>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="container-12 pt-16 pb-10">
+      <p><a class="underline" href="index.html">← Back to Overview</a></p>
+      <div class="soft-img overflow-hidden bg-[var(--gray-bg)]/60 p-10 text-center">
+        <h1 class="text-3xl md:text-5xl font-semibold">Graphical Process Designer (GPD)</h1>
+        <p class="mt-2 text-lg opacity-80">Design hub foundation for ITSM · Legacy → Future</p>
+        <p class="mt-1 text-sm opacity-70">Role: Senior UX Designer · Company: TOPdesk GmbH · Tools: Figma, Miro, BPMN ·
+          Status: MVP testing</p>
+      </div>
+    </section>
+
+    <!-- TL;DR -->
+    <section class="container-12">
+      <div class="tldr mt-6 text-left">
+        <h2 class="text-xl font-semibold">TL;DR</h2>
+        <p class="mt-2 opacity-90">
+          Unified, BPMN-inspired workflow designer to replace siloed modules and modernize process authoring. Built
+          accessibility-first interactions, a canvas + side-panel model, and an MVP now under user testing.
+        </p>
+      </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="container-12 mt-6" id="project-overview">
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="card p-4 md:col-span-1">
+          <h3 class="text-sm opacity-70">Role</h3>
+          <p>Senior UX Designer</p>
+        </div>
+        <div class="card p-4 md:col-span-1">
+          <h3 class="text-sm opacity-70">Team</h3>
+          <p>1 PO, 4 developers, 1 tester, 1 designer, 1 scrum master, 1 solutions architect</p>
+        </div>
+        <div class="card p-4 md:col-span-1">
+          <h3 class="text-sm opacity-70">Timeline</h3>
+          <p>10 months research + 3 months MVP</p>
+        </div>
+        <div class="card p-4 md:col-span-1">
+          <h3 class="text-sm opacity-70">Outcome</h3>
+          <ul class="list-disc pl-5">
+            <li>MVP prototype built and being tested</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case details "as is" -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-2">🔧 Case Study: Designing the Graphical Process Designer (GPD)
+        for the Future of ITSM</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-3">
+        <div class="card p-4">
+          <h3 class="text-sm opacity-70">Role</h3>
+          <p>Senior UX Designer</p>
+        </div>
+        <div class="card p-4">
+          <h3 class="text-sm opacity-70">Company</h3>
+          <p>TOPdesk GmbH</p>
+        </div>
+        <div class="card p-4">
+          <h3 class="text-sm opacity-70">Duration</h3>
+          <p>10 months (original research) + ongoing MVP prototype 3 months</p>
+        </div>
+        <div class="card p-4 md:col-span-2">
+          <h3 class="text-sm opacity-70">Team</h3>
+          <p>6 UX designers, 5 front-end developer, 5 years ago and now 1 PO, 4 developers, 1 tester, 1 Designer, 1
+            Scrum master and 1 Solutions Architect.</p>
+        </div>
+        <div class="card p-4">
+          <h3 class="text-sm opacity-70">Tools</h3>
+          <p>Figma, Miro, Affinity Mapping, BPMN, HTML5, SVG</p>
+        </div>
+        <div class="card p-4 md:col-span-3">
+          <h3 class="text-sm opacity-70">Status &amp; Vision</h3>
+          <p><strong>Status:</strong> MVP prototype built and being tested<br /><strong>Vision:</strong> Build the
+            foundation for a design-driven “Design Hub” in ITSM</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. Call to Adventure -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-3">🧭 1. The Call to Adventure</h2>
+      <p>TOPdesk’s ITSM platform had a problem: it was fragmented, siloed, and bloated. Each request type — incidents,
+        changes, problems, operational activities — existed in its own isolated module. This complexity resulted in
+        clunky interfaces, inconsistent UX, and difficult cross-team collaboration.</p>
+      <p>Internally, it looked like “every module was designed by a different team.” Externally, competitors were
+        surpassing us with modern, integrated tools.</p>
+      <p>That’s when the Graphical Process Designer (GPD) was envisioned: a new way for application owners to design,
+        visualize, and manage processes in a unified, intuitive, and future‑ready interface — anchored in BPMN, but
+        flexible enough for the real-world needs of IT, HR, and facilities teams alike.</p>
+      <div class="grid md:grid-cols-2 mt-4">
+        <img class="soft-img" src="assets/gpd/Image11.png" alt="Idea board with post-its, how it all began"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image12.png" alt="An example operator flow for change request"
+          loading="lazy" />
+      </div>
+    </section>
+
+    <!-- 2. The Challenge -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-3">🚧 2. The Challenge</h2>
+      <h3 class="font-semibold">Organizational Barriers:</h3>
+      <ul class="list-disc pl-6">
+        <li>Stakeholders were hesitant to abandon a system beloved by existing customers.</li>
+        <li>There was no clear MVP at the beginning — only a vision.</li>
+      </ul>
+      <h3 class="font-semibold mt-3">Technical Constraints:</h3>
+      <ul class="list-disc pl-6">
+        <li>The existing app was built on a legacy monolith (Mango UI) with no modern scalability.</li>
+        <li>Moving to a greenfield stack (HTML5, SVG, DOM) required deep exploration and buy-in.</li>
+      </ul>
+      <h3 class="font-semibold mt-3">UX Hurdles:</h3>
+      <ul class="list-disc pl-6">
+        <li>We needed to build accessibility into a highly visual, drag-and-drop interface — no small feat.</li>
+        <li>Defining complex process elements like gateways, decision trees, and task types required simplifying
+          abstract logic into approachable UI.</li>
+      </ul>
+      <p class="mt-2">Despite these constraints, we pushed forward with full research commitment and long-term strategy.
+      </p>
+      <div class="grid md:grid-cols-2 mt-4">
+        <img class="soft-img" src="assets/gpd/Image21.png" alt="Affinity board insights from all the interviews"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image22.png" alt="Onboarding user journey for new employee"
+          loading="lazy" />
+      </div>
+    </section>
+
+    <!-- 3. The Journey -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-3">🔁 3. The Journey</h2>
+      <h3 class="font-semibold">📊 Research &amp; Discovery (Phase 1 – 4 Years Ago)</h3>
+      <ul class="list-disc pl-6">
+        <li>Affinity diagrams</li>
+        <li>Workflow mapping across 4 key modules</li>
+        <li>Customer journey maps</li>
+        <li>Personas, sitemap, and idea dump boards</li>
+        <li>UX audit of form flows, incidents, and escalations</li>
+      </ul>
+      <p class="mt-2">We gathered over 30 key insights including:</p>
+      <ul class="list-disc pl-6">
+        <li>“Too many clicks for basic tasks.”</li>
+        <li>“Terminology is confusing and inconsistent.”</li>
+        <li>“Power users need faster keyboard navigation.”</li>
+        <li>“Customers expect automation, integrations, and AI-driven suggestions.”</li>
+        <li>“The interface doesn’t reflect how departments work in reality.”</li>
+      </ul>
+      <h3 class="font-semibold mt-4">🧪 Design &amp; Prototyping (Phase 2 – Today)</h3>
+      <p>Fast forward 4 years: we resurrected the work with a leaner team and a sharper focus.</p>
+      <p class="mt-2 font-medium">Prototype Evolution:</p>
+      <ul class="list-disc pl-6">
+        <li>Lo-fi paper sketches → wireframes → hi-fi MVP</li>
+        <li>Introduced a canvas drawing tool, drag-and-drop toolbar, and side panel for task properties</li>
+        <li>Built new UI patterns from scratch: command bar, keyboard shortcuts, and accessibility-first interactions
+        </li>
+        <li>Explored manual vs. system tasks, reusable workflow elements, and visual task-linking via SVG and DOM</li>
+      </ul>
+      <p>We’re now testing the MVP with users, asking them to build real workflows (e.g., onboarding, password resets)
+        to validate comprehension and ease of use.</p>
+      <div class="grid md:grid-cols-4 mt-4">
+        <img class="soft-img" src="assets/gpd/Image31.png" alt="A sample of a Do-Go map for Graphical Process Designer"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image32.png"
+          alt="Various wireframes and low fidelidy designs of how a workflow can be integrated into a request"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image33.png" alt="Various low fidelidy designs of a wokflow manager"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image34.png"
+          alt="Various designs of a wokflow manager can be made accessible" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- 4. The Transformation -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-3">✨ 4. The Transformation</h2>
+      <h3 class="font-semibold">🎯 MVP Highlights:</h3>
+      <ul class="list-disc pl-6">
+        <li>Allows users to design workflows via BPMN‑style drag‑and‑drop interface</li>
+        <li>Users can define:
+          <ul class="list-disc pl-6">
+            <li>Manual tasks (e.g., inventory checks)</li>
+            <li>System tasks (e.g., automated API calls or email notifications)</li>
+          </ul>
+        </li>
+        <li>Includes out‑of‑the‑box workflows: password resets, new software requests, onboarding</li>
+        <li>Fully integrated with the request card via APIs</li>
+      </ul>
+      <h3 class="font-semibold mt-3">🔄 What It Solves:</h3>
+      <ul class="list-disc pl-6">
+        <li>Replaces siloed, module‑bound tasks with flexible, request‑based workflows</li>
+        <li>Simplifies routing, ownership, and visibility across departments</li>
+        <li>Offers a streamlined UX and modern interaction model</li>
+        <li>Lays the groundwork for automation, analytics, and AI</li>
+      </ul>
+      <h3 class="font-semibold mt-3">🏆 What I’m Proud Of:</h3>
+      <ul class="list-disc pl-6">
+        <li>Accessibility depth — keyboard navigation, tab sequences, and a command bar interface supporting screen
+          readers and power users</li>
+        <li>Inventing a new interaction paradigm within TOPdesk from the ground up</li>
+        <li>Building on years of research instead of starting from scratch</li>
+      </ul>
+      <div class="grid md:grid-cols-4 mt-4">
+        <img class="soft-img" src="assets/gpd/Image40.png" alt="Tabbing order inside a workflow designer"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image41.png"
+          alt="First hi-fidelity design of a graphical process designer" loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image42.png" alt="First hi-fidelity design of a workflow manager"
+          loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image43.png"
+          alt="What a deatails panel on the right hand side of the wrokflow designer looks like" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- 5. The Return -->
+    <section class="container-12 py-10">
+      <h2 class="text-2xl md:text-3xl font-semibold mb-3">🔭 5. The Return</h2>
+      <h3 class="font-semibold">💡 What I Learned:</h3>
+      <ul class="list-disc pl-6">
+        <li>Designing scalable process tools requires collaboration across every team: service design, request
+          management, task handling, notifications, SSP, and knowledge base.</li>
+        <li>Defining task behaviors in the side panel was the most complex — and most impactful — design challenge.</li>
+        <li>Maintaining alignment across UX, group managers, POs, and devs is just as critical as interface polish.</li>
+      </ul>
+      <h3 class="font-semibold mt-3">🔄 Trade‑offs for MVP:</h3>
+      <ul class="list-disc pl-6">
+        <li>No multi‑language support at launch</li>
+        <li>No AI‑assisted task generation (yet)</li>
+        <li>Focused only on a subset of BPMN elements (the most‑used 5–6)</li>
+      </ul>
+      <h3 class="font-semibold mt-3">🧱 What’s Next: Scaling the Vision</h3>
+      <p class="mt-1 font-medium">🌐 A Unified “Design Hub”:</p>
+      <ul class="list-disc pl-6">
+        <li>Form Designer → design dynamic input forms</li>
+        <li>Workflow Designer (GPD) → define business logic</li>
+        <li>Action/Event Manager → configure triggers</li>
+        <li>Service Designer → build service catalogs</li>
+        <li>SSP Designer → tailor self-service portals by business unit</li>
+      </ul>
+      <p class="mt-2 font-medium">🤖 AI &amp; Analytics:</p>
+      <ul class="list-disc pl-6">
+        <li>Auto-suggest next steps in workflows</li>
+        <li>Track bottlenecks and optimize with data</li>
+        <li>NLP to create workflows from text input</li>
+        <li>Intelligent validation based on previous process runs</li>
+      </ul>
+      <blockquote class="mt-3 italic opacity-90">"GPD is not just a module. It’s the beating heart of the next-gen
+        TOPdesk."</blockquote>
+      <div class="grid md:grid-cols-2 mt-4">
+        <img class="soft-img" src="assets/gpd/Image51.png"
+          alt="Strategic vision of what the next generation of an ITSM application can look like" loading="lazy" />
+        <img class="soft-img" src="assets/gpd/Image52.png"
+          alt="A modernized version of a graphical process designer with AI/command box for advanced and power users"
+          loading="lazy" />
+      </div>
+    </section>
   </main>
+
+  
+
+  <footer class="mt-24 border-t border-black/10">
+    <div class="container-12 py-8 text-center">
+      <div class="text-sm opacity-80">© 2025 Tyron Vaz</div>
+      <div class="mt-4 flex items-center justify-center gap-4">
+        <a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center"
+          href="https://www.linkedin.com/in/tyron123/" title="LinkedIn" aria-label="LinkedIn" target="_blank"
+          rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.2 2.3-2.46 4.74-2.46 5.07 0 6 3.34 6 7.68V24h-5V16.1c0-1.88-.03-4.3-2.62-4.3-2.63 0-3.03 2.05-3.03 4.16V24h-5V8z" />
+          </svg><span class="sr-only">LinkedIn</span>
+        </a>
+        <a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center"
+          href="https://www.behance.net/tyron123/" title="Behance" aria-label="Behance" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M4 7h6a4 4 0 110 8H4V7zm6 6a2 2 0 100-4H6v4h4zM14 7h6v2h-6V7zm.5 3H20a3.5 3.5 0 110 7h-6v-2h6a1.5 1.5 0 100-3h-5.5v-2z" />
+          </svg><span class="sr-only">Behance</span>
+        </a>
+        <a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center" href="mailto:tyron.vaz@gmail.com"
+          title="Email" aria-label="Email" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5zm2 0l8 6 8-6H4zm16 2.5l-8 6-8-6V19h16V7.5z" />
+          </svg><span class="sr-only">Email</span>
+        </a>
+        <a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center"
+          href="https://medium.com/@tyron123" title="Blog" aria-label="Blog" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M4 7h2.4L9 14.6 12 7h2.8l4.2 2.9V19L14.8 21H12l-2-1.4L8 21H5.2L4 19V7z" />
+          </svg><span class="sr-only">Blog</span>
+        </a>
+        <a class="p-2 rounded-md hover:bg-black/5 focus-ring inline-flex items-center"
+          href="https://drive.google.com/file/d/1AWr2HnycVeeC_N_vxYVd1TCmuO-fCzOn/view?usp=drive_link" title="Résumé"
+          aria-label="Résumé" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M6 2h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2zm7 1.5V7h3.5L13 3.5zM8 9h8v2H8V9zm0 4h8v2H8v-2zm0 4h6v2H8v-2z" />
+          </svg><span class="ml-1 text-sm">Résumé</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+  <script>(function () { var b = document.getElementById('nav-toggle'), n = document.getElementById('primary-nav'); if (b && n) { b.addEventListener('click', function () { var h = n.classList.toggle('hidden'); b.setAttribute('aria-expanded', (!h).toString()); }); } })();</script>
+  
+  
+
 </body>
+
 </html>
