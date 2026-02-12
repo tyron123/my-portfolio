@@ -8,10 +8,10 @@
 </head>
 <body>
 <header>
-  <div class="container">
+  <div class="container header-row">
     <div class="logo">Tyron Vaz</div>
     <nav>
-      <div class="hamburger">&#9776;</div>
+      <button class="hamburger" aria-label="Menu">&#9776;</button>
       <ul class="menu">
         <li><a href="#projects">Work</a></li>
         <li><a href="#about">About</a></li>
@@ -20,30 +20,41 @@
     </nav>
   </div>
 </header>
+
 <section id="hero">
   <div class="container">
-    <h1>I design clear, usable systems</h1>
-    <p class="tagline">for messy workflows, B2B tools, and humans who just want things to make sense.</p>
-    <a href="#projects" class="btn">View My Work</a>
+    <h1 class="hero-headline">I design clear, outcome-focused UX for complex tools.</h1>
+    <p class="tagline">B2B systems, enterprise workflows, and software that needs to make sense fast.</p>
+    <ul class="hero-highlights">
+      <li>7+ years in UX / Product Design</li>
+      <li>23% faster task handling at rollout</li>
+      <li>Based in Munich · Ex-TOPdesk</li>
+    </ul>
+    <a href="#projects" class="btn">See Projects ↓</a>
   </div>
 </section>
+
 <section id="projects">
   <div class="container">
     <h2>Featured Work</h2>
+
     <div class="project">
       <h3>Kanban Board Redesign</h3>
       <p><strong>Problem:</strong> Agents had to switch between 3 task views with poor filters, no pagination, and outdated UI.</p>
       <p><strong>Outcome:</strong> Unified view with better filters, keyboard support, and design system updates → 23% faster task handling, 9/10 user satisfaction.</p>
       <p><a href="kanban.html" class="case-link" target="_blank">Read the Case Study</a></p>
     </div>
+
     <div class="project">
       <h3>Graphical Process Designer (GPD)</h3>
       <p><strong>Problem:</strong> Process creation was fragmented and hard to scale—no shared language or visual logic.</p>
       <p><strong>Outcome:</strong> Built a BPMN-style drag-and-drop designer from scratch → MVP tested, forms the base for a new “Design Hub” inside ITSM.</p>
       <p><a href="gpd.html" class="case-link" target="_blank">Read the Case Study</a></p>
     </div>
+
   </div>
 </section>
+
 <section id="about">
   <div class="container">
     <h2>About Me</h2>
@@ -56,12 +67,14 @@
     <a href="TyronVaz_Resume.pdf" class="btn" target="_blank">Download Résumé</a>
   </div>
 </section>
+
 <footer>
   <div class="container">
     <h2>Let’s talk</h2>
     <p>Email <a href="mailto:tyron.vaz@gmail.com">tyron.vaz@gmail.com</a> or connect on <a href="https://www.linkedin.com/in/tyronvaz" target="_blank">LinkedIn</a>.</p>
   </div>
 </footer>
+
 <script src="script.js"></script>
 </body>
 </html>

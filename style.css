@@ -25,10 +25,13 @@ header {
   top: 0;
   z-index: 10;
 }
-header .container {
+.header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap;
+}
+header .container {
   padding: 1rem 0;
 }
 .logo { font-weight: 700; }
@@ -55,7 +58,17 @@ nav a, nav button {
   font-size: 1.1rem;
   color: #666;
   max-width: 600px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.5rem;
+}
+.hero-highlights {
+  list-style: disc inside;
+  margin: 1rem auto 2rem;
+  padding: 0;
+  max-width: 500px;
+  text-align: left;
+}
+.hero-highlights li {
+  margin: 0.25rem 0;
 }
 .btn {
   display: inline-block;
